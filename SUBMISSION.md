@@ -4,20 +4,114 @@
 
 ### My graph and state
 
-TODO: draw the first graph and explain what each node reads and changes. Answer the four state and routing questions in the brief.
+I created a simple university IT helpdesk using LangGraph without an LLM. The graph reads a user message, identifies the problem, and returns instructions from `data/helpdesk.json`.
+
+**Original graph:**
+
+```text
+START
+  |
+read_request
+  |
+  +-- wifi_help ------> END
+  |
+  +-- password_help --> END
+  |
+  +-- other_help -----> END
+```
+
+The graph uses three state fields:
+
+| Field | Description |
+| --- | --- |
+| `message` | The original user message |
+| `category` | The detected problem category |
+| `reply` | The final helpdesk response |
+
+**What each node reads and changes:**
+
+- `read_request` reads `message` and updates `category`.
+- `wifi_help` reads the Wi-Fi instructions from `data/helpdesk.json` and updates `reply`.
+- `password_help` reads the password instructions from `data/helpdesk.json` and updates `reply`.
+- `other_help` updates `reply` with a question about Wi-Fi or password.
+
+**Answers to the four questions:**
+
+1. Each node reads the current state and returns an update. The `read_request` node changes the category, while help nodes change the reply.
+2. A node updates the state, while a conditional edge chooses which node runs next based on the category.
+3. The next node receives the current graph state, not only the previous node's update.
+4. `START` is the entry point, `END` finishes execution, and `compile()` creates an executable graph.
 
 ### Predictions before running
 
 | Message | Predicted route | Actual route | What I learned |
 | --- | --- | --- | --- |
-| I cannot connect to Wi-Fi. | | | |
-| I forgot my PASSWORD. | | | |
-| My laptop screen is broken. | | | |
-| My Wi-Fi password does not work. | | | |
+| I cannot connect to Wi-Fi. | wifi_help | wifi_help | Wi-Fi keywords are detected. |
+| I forgot my PASSWORD. | password_help | password_help | Routing ignores uppercase and lowercase differences. |
+| My laptop screen is broken. | other_help | other_help | Unsupported problems go to other_help. |
+| My Wi-Fi password does not work. | wifi_help | wifi_help | Wi-Fi has priority when both topics appear. |
+
+All four predictions matched the original graph results.
+
+The original routing checks for Wi-Fi first. Therefore, a message containing both Wi-Fi and password goes to `wifi_help`.
+
+The original execution results are saved in `outputs/part1_original_trace.txt`.
 
 ### My change to the graph
 
-TODO: draw the graph with clarify_problem, show the new trace, and explain the difference. What does LangGraph control, and what do my functions decide?
+I added a new node called `clarify_problem`.
+
+When a message contains both Wi-Fi and password, the graph asks the user which problem they want to solve first.
+
+**Updated graph:**
+
+```text
+START
+  |
+read_request
+  |
+  +-- wifi_help --------> END
+  |
+  +-- password_help ----> END
+  |
+  +-- other_help -------> END
+  |
+  +-- clarify_problem --> END
+```
+
+**Updated execution trace:**
+
+```text
+USER: My Wi-Fi password does not work.
+
+NODE: read_request
+NODE UPDATE: {'category': 'clarify'}
+
+NODE: clarify_problem
+NODE UPDATE: {'reply': 'Your message mentions both Wi-Fi and password. Which problem would you like to solve first?'}
+
+CATEGORY: clarify
+END
+```
+
+Before the change, the message went to `wifi_help`. After the change, it goes to `clarify_problem`.
+
+The other three messages still follow their original routes.
+
+**What LangGraph controls:**
+
+LangGraph controls the execution order, conditional edges, state passing, and graph termination.
+
+**What my Python functions decide:**
+
+My functions detect keywords, select categories, and generate replies using the local helpdesk data.
+
+No LLM or API key is used in Part 1.
+
+**Saved execution logs:**
+
+- `outputs/part1_original_trace.txt` — original graph results.
+- `outputs/part1_trace.txt` — updated graph results, including state after each node.
 
 ## Part 2 — Model and tools
 
