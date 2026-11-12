@@ -1,0 +1,174 @@
+================================================================ S10 —
+USE THE CURRENT CONVERSATION Status profile: normal USER ID: demo-user-a
+THREAD ID: s10 SAVED LANGUAGE: Kazakh
+
+USER: I cannot connect to Wi-Fi. I enabled it and forgot the saved
+network, but reconnecting failed.
+
+TOOL CALLS: [‘find_instructions’, ‘check_service_status’] TOOL RESULT:
+NOT CAPTURED in terminal output.
+
+FINAL ANSWER: Wi-Fi қызметінде белгілі іркіліс жоқ. Қосылу мәселесін
+шешу үшін мына қадамдарды орындап көріңіз:
+
+1.  Wi-Fi қосулы екенін және ұшақ режимі өшірулі екенін тексеріңіз.
+2.  Тізімнен Campus-Demo желісін таңдаңыз.
+3.  Қосылу сәтсіз болса, сақталған желіні ұмытыңыз (forget), содан кейін
+    қайтадан қосылып көріңіз.
+
+Осыдан кейін де қосыла алмасаңыз, мына мәліметтерді жіберіңіз: - Құрылғы
+түрі мен операциялық жүйе (мысалы, Windows, macOS, iOS, Android) - Қате
+хабарламасы бар болса, соның мәтіні - Басқа желіге қосыла аласыз ба
+
+Осы ақпаратпен мен қолданба ішінде жергілікті ticket жобасын дайындай
+аламын. Бұл жобаны тіркеу ретінде жіберілген деп есептеуге болмайды, оны
+кейін өзіңіз жіберуіңіз керек.
+
+TOOL ROUNDS: 1
+
+USER: Which steps did I already try?
+
+TOOL CALLS: [] TOOL RESULT: None — no tools called.
+
+FINAL ANSWER: Сіз өзіңіз айтқан бойынша мына қадамдарды орындадыңыз:
+
+1.  Wi-Fi-ды қostu: Сіз Wi-Fi-ды қостыңыз.
+2.  Сақталған желіні ұмыттыңыз: Сіз сақталған желіні ұмыттыңыз.
+3.  Қайта қосылу: Қайта қосылуға әрекет еттіңіз, бірақ сәтсіз аяқталды.
+
+Мына қадамдарды айтқан жоқсыз, оларды әлі тексермеген болуыңыз мүмкін:
+
+-   Ұшақ режимі өшірулі ме, соны тексеру.
+-   Campus-Demo желісін тізімнен таңдап, қосылуға әрекет ету.
+
+Осы екі қадамды орындап көріңіз. Сәтсіз болса, қате хабарламасының
+мәтінін және құрылғы түрін (мысалы, Windows, macOS, iOS немесе Android)
+жіберіңіз.
+
+TOOL ROUNDS: 0 OBSERVATION: The assistant recalled three steps from
+conversation history.
+
+================================================================ S11 —
+PERSIST AND RECALL AFTER RESTART Status profile: normal USER ID:
+demo-user-a THREAD ID: restart-a
+
+FIRST PROCESS START SAVED LANGUAGE: Russian
+
+USER: Please remember that I prefer replies in Kazakh. My issue is
+Wi-Fi. I enabled it and tried reconnecting, but it still fails.
+
+USER MEMORY EVENT: Language saved: Kazakh TOOL CALLS:
+[‘find_instructions’, ‘check_service_status’] TOOL RESULT: NOT CAPTURED
+in terminal output.
+
+FINAL ANSWER: Сіз Wi-Fi-ды қосқаныңызды және қайта қосылуға әрекет
+жасағаныңызды түсіндім. Жауаптарымды қазақ тілінде беремін.
+
+Университеттің нұсқаулығы бойынша мына қадамдарды орындап көріңіз:
+
+1.  Wi-Fi қосылғанын және ұшақ режимі өшірулі екенін тексеріңіз.
+2.  Campus-Demo желісін таңдаңыз.
+3.  Қосылу сәтсіз болса, сақталған желіні ұмытыңыз (forget network),
+    содан кейін қайта қосылыңыз.
+
+Wi-Fi қызметінің күйін тексердім: ол қазір жұмыс істеп тұр, хабарланған
+үзілістер жоқ.
+
+Осыдан кейін де қосыла алмасаңыз, мына мәліметтерді жіберіңіз, сонда
+қателікті тіркеу үшін ticket жобасын дайындай аламын: - Құрылғыңыздың
+түрі мен операциялық жүйесі (мысалы, Windows, macOS, iOS, Android) -
+Экранда көрінетін қате хабарламасы, бар болса - Басқа Wi-Fi желілеріне
+қосыла аласыз ба, соны білгіңіз келеді
+
+Ескертетін бір нәрсе: ticket жобасы тек жергілікті түрде дайындалады
+және ол автоматты түрде жіберілмейді.
+
+TOOL ROUNDS: 1 USER: exit
+
+PROCESS RESTART: python part3.py LOCAL STORAGE: preserved SAVED
+LANGUAGE: Kazakh
+
+USER: Which problem and steps did we discuss?
+
+TOOL CALLS: [] TOOL RESULT: None — no tools called.
+
+FINAL ANSWER: Талқылаған мәселе: Wi-Fi қосулы, бірақ қайта қосылуға
+талпынғанда байланыс сәтсіз аяқталады.
+
+Университет нұсқаулығы бойынша ұсынылған қадамдар:
+
+1.  Wi-Fi қосылғанын және ұшақ режимі өшірулі екенін тексеру.
+2.  Campus-Demo желісін таңдау.
+3.  Қосылу сәтсіз болса, сақталған желіні ұмыту (forget network), содан
+    кейін қайта қосылу.
+
+Wi-Fi қызметінің күйін де тексердім: ол қазір жұмыс істеп тұр,
+хабарланған үзіліс жоқ.
+
+Осы қадамдардан кейін мәселе шешілмесе, құрылғыңыздың түрін, операциялық
+жүйесін және экранда көрінетін қате хабарламасын жіберіңіз. Сонда ticket
+жобасын дайындай аламын. Ол тек жергілікті түрде сақталады және
+автоматты түрде жіберілмейді.
+
+TOOL ROUNDS: 0 OBSERVATION: The saved language and conversation history
+survived process restart.
+
+================================================================ S12 —
+PREFERENCE ACROSS THREADS WITHOUT REPLAY Status profile: normal USER ID:
+demo-user-a OBSERVED RESULT: PARTIAL — first required scenario message
+was NOT sent.
+
+FIRST PROCESS THREAD ID: preference-a1 SAVED LANGUAGE: Kazakh USER: exit
+
+SECOND PROCESS THREAD ID: preference-a2 SAVED LANGUAGE: Kazakh
+
+USER: Which language did I ask you to use? What can you help with?
+
+TOOL CALLS: [] TOOL RESULT: None — no tools called.
+
+FINAL ANSWER: Бұл аккаунт үшін сақталған таңдаулы тіл — қазақ тілі. Осы
+чатта сіз бұл тілді нақты сұрамаған шығарсыз, бірақ мен барлық жауапты
+қазақша беремін. Басқа тілді қаласаңыз, айта аласыз.
+
+Университеттің IT бөлімі бойынша мына көмектерді бере аламын:
+
+-   Нұсқаулар табу: Wi-Fi қосылу немесе құпия сөзді қалпына келтіру
+    бойынша жергілікті анықтамалық нұсқаулар.
+-   Сервис күйін тексеру: Wi-Fi немесе аккаунтты қалпына келтіру
+    қызметтерінің қазіргі жағдайы. Бұл деректер тексеру сәтіндегі
+    мәлімет болады, сондықтан жөндеу уақыты туралы болжам жасамаймын.
+-   Өтінім жобасын дайындау: Мәселені сипаттап, қандай қадамдар
+    жасалғанын жазып, жергілікті жоба ретінде сақтай аламын. Жобаны мен
+    жібермеймін, оны қолмен жіберу керек болады.
+
+Қандай мәселеңіз бар екенін айтсаңыз, осыдан бастайық.
+
+TOOL ROUNDS: 0 OBSERVATION: Language persisted across threads, but the
+specified first message was skipped.
+
+================================================================ S13 —
+DO NOT SHARE MEMORY BETWEEN USERS Status profile: normal OBSERVED
+RESULT: PARTIAL — required preceding demo-user-a/isolation-a message was
+NOT run in this test.
+
+USER ID: demo-user-b THREAD ID: isolation-b SAVED LANGUAGE: English
+
+USER: Have I told you a preferred language or a previous problem?
+
+TOOL CALLS: [] TOOL RESULT: None — no tools called.
+
+FINAL ANSWER: No, you haven’t told me a previous problem in this
+conversation. This thread starts with your question, so I have no
+earlier problem description from you.
+
+English is set as the preferred response language for this session, but
+that comes from the helpdesk configuration, not from anything you said.
+
+What IT problem can I help you with today? If it’s related to Wi-Fi or
+account access, tell me what’s happening, such as any error messages and
+what you’ve already tried.
+
+TOOL ROUNDS: 0 OBSERVATION: User B did not receive User A’s Kazakh
+preference or conversation history in this observed run.
+
+================================================================

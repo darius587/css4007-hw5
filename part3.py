@@ -86,6 +86,32 @@ def load_language(user_id: str) -> str:
     return row[0] if row else "English"
 
 
+def detect_language_preference(message: str):
+    text = message.lower()
+
+    preference_phrases = [
+        "prefer replies in",
+        "please reply in",
+        "respond in",
+        "speak in",
+        "answer in",
+    ]
+
+    if not any(phrase in text for phrase in preference_phrases):
+        return None
+
+    if "kazakh" in text:
+        return "Kazakh"
+
+    if "russian" in text:
+        return "Russian"
+
+    if "english" in text:
+        return "English"
+
+    return None
+
+
 def call_model(state: MemoryState, config):
     user_id = config["configurable"]["user_id"]
     thread_id = config["configurable"]["thread_id"]
@@ -222,7 +248,10 @@ def main():
         }
 
         print("\nUniversity IT Helpdesk Assistant")
-        print("Commands: /language ru, /language en, exit\n")
+        print(
+            "Commands: /language ru, /language en, "
+            "/language kz, exit\n"
+        )
 
         while True:
             user_input = input("You: ").strip()
@@ -245,6 +274,27 @@ def main():
                 print("Language saved: English")
                 continue
 
+            if user_input.lower() in (
+                "/language kz",
+                "/language kk",
+            ):
+                save_language(user_id, "Kazakh")
+                language = "Kazakh"
+                print("Language saved: Kazakh")
+                continue
+
+            # Detect and save language from normal messages
+            detected_language = detect_language_preference(
+                user_input
+            )
+
+            if detected_language:
+                save_language(user_id, detected_language)
+                language = detected_language
+                print(
+                    f"[USER MEMORY] Language saved: {language}"
+                )
+
             # Check how many messages were already saved
             previous_state = graph.get_state(config)
             previous_count = len(
@@ -253,7 +303,9 @@ def main():
 
             result = graph.invoke(
                 {
-                    "messages": [HumanMessage(content=user_input)],
+                    "messages": [
+                        HumanMessage(content=user_input)
+                    ],
                     "tool_rounds": 0,
                 },
                 config=config,
@@ -267,9 +319,13 @@ def main():
                     for call in message.tool_calls:
                         print(f"[TOOL CALL] {call['name']}")
 
-            print(f"[TOOL ROUNDS] {result.get('tool_rounds', 0)}")
+            print(
+                f"[TOOL ROUNDS] "
+                f"{result.get('tool_rounds', 0)}"
+            )
 
             final_answer = result["messages"][-1].content
+
             print("\nAssistant:", final_answer)
             print()
 
